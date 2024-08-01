@@ -19,7 +19,7 @@ using HashSets;
 //HashSet:
 //Add: O(1)
 //Remove: O(1)
-//Find: O(1
+//Find: O(1)
 
 CustomHashSet<int> hashSet = new CustomHashSet<int>();
 
