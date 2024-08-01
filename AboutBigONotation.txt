@@ -1,0 +1,6 @@
+﻿O(1) - Constant time complexity (Sabit zaman mürəkkəbliyi)
+O(log n) - Logarithmic time complexity (Logaritmik zaman mürəkkəbliyi)
+O(n) - Linear time complexity (Xətti zaman mürəkkəbliyi)
+O(n log n) - Linearithmic time complexity (Xətti Logaritmik zaman mürəkkəbliyi)
+O(n^2) - Quadratic time complexity (Kvadrat zaman mürəkkəbliyi)
+O(2^n) - Exponential time complexity (Eksponensial zaman mürəkkəbliyi)
