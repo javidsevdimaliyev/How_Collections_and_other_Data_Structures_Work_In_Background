@@ -1,9 +1,5 @@
 ﻿using Stacks;
 
-// Data Structures => Stack
-// LIFO (Last in first out)
-//Stack(Yığın) imlementation samples:
-//Browser History
 CustomStack<string> stack = new();
 
 stack.Push("A");

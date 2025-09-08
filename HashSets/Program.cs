@@ -1,25 +1,6 @@
 ﻿// Create a new CustomHashSet
 using HashSets;
 
-/*
- Solutions to HashSet collisions
-    General logic      : h(x)=x % size
-
-    Linear probing     : h(x)=(x+i) % size
-    Chaining probing   : h(x)=x % size and contains one more data like LinkedList next node  (Default Use of HashSet)  
-    Quadratic probing  : h(x)=(x+i^2) % size
-    Plus3 probing      : h(x)=(x+3) % size
-    Double Hashing     : h(x)=(x+i*2) % size 
-
-    Except Chaining probing, others are named in general Open addressing technigue.
- */
-
-//Time Complexity : O(1)
-
-//HashSet:
-//Add: O(1)
-//Remove: O(1)
-//Find: O(1)
 
 CustomHashSet<int> hashSet = new CustomHashSet<int>();
 

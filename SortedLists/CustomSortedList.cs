@@ -2,6 +2,23 @@
 
 namespace SortedLists
 {
+  
+    /* KEY-VALUE PAIR
+
+        1 -> "One"
+        1 -> "NewOne" // Throws an exception
+        2 -> "Two"
+        3 -> "Three"
+
+     */
+
+    // SortedList<TKey, TValue>:
+    //    Space Complexity : O(n)
+    //    Time Complexity : 
+    //    Add: O(log n) for binary search + O(n) for shifting
+    //    Remove: O(n)
+    //    Search: O(log n)
+    //    Access by Index: O(1), by Key: O(log n)
     public class CustomSortedList<TKey, TValue> : IEnumerable<KeyValuePair<TKey, TValue>>
     {
         /*
@@ -36,8 +53,8 @@ namespace SortedLists
 
             int insertIndex = ~i;
 
-            Array.Copy(keys, insertIndex, keys, insertIndex + 1, count - insertIndex); ;
-            Array.Copy(values, insertIndex, values, insertIndex + 1, count - insertIndex); ;
+            Array.Copy(keys, insertIndex, keys, insertIndex + 1, count - insertIndex); 
+            Array.Copy(values, insertIndex, values, insertIndex + 1, count - insertIndex); 
 
             keys[insertIndex] = key;
             values[insertIndex] = value;

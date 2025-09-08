@@ -1,5 +1,23 @@
 ﻿namespace HashSets
 {
+    /*
+ Solutions to HashSet collisions
+    General logic      : h(x)=x % size
+
+    Linear probing     : h(x)=(x+i) % size
+    Chaining probing   : h(x)=x % size and contains one more data like LinkedList next node  (Default Use of Dictionary)  
+    Quadratic probing  : h(x)=(x+i^2) % size
+    Plus3 probing      : h(x)=(x+3) % size
+    Double Hashing     : h(x)=(x+i*2) % size 
+
+    Except Chaining probing, others are named in general Open addressing technigue.
+
+     Space Complexity : O(n)
+     Time Complexity : 
+     Add: O(1) average, O(n) worst-case
+     Remove: O(1) average, O(n) worst-case
+     Search: O(1) average, O(n) worst-case
+ */
 
     public class CustomHashSet<T>
     {
@@ -42,11 +60,11 @@
                     return false; // Item already exists in the HashSet
                 }
 
-                // Alternatif probing stratejileri
+               // Alternative probing strategies
                 index = (index + i) % capacity; // Linear probing
-                index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
-                index = (index + 3) % capacity; // Plus3 probing
-                index = (index + i * 2) % capacity; // Double Hashing probing
+                //index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
+                //index = (index + 3) % capacity; // Plus3 probing
+                //index = (index + i * 2) % capacity; // Double Hashing probing
                 i++;
 
                 if (i >= capacity)
@@ -73,15 +91,36 @@
                     return true;
                 }
 
-                // Alternatif probing stratejileri
+                // Alternative probing strategies
                 index = (index + i) % capacity; // Linear probing
-                index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
-                index = (index + 3) % capacity; // Plus3 probing
-                index = (index + i * 2) % capacity; // Double Hashing probing
+                //index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
+                //index = (index + 3) % capacity; // Plus3 probing
+                //index = (index + i * 2) % capacity; // Double Hashing probing
                 i++;
             }
 
             return false;
+        }
+
+        public T GetItem(T item)
+        {
+            int index = GetIndex(item);
+            int i = 0;
+
+            while (occupied[index])
+            {
+                if (EqualityComparer<T>.Default.Equals(items[index], item))
+                {
+                    return items[index];
+                }
+
+                index = (index + i) % capacity; // Linear probing
+                i++;
+
+                if (i >= capacity) break;
+            }
+
+            return default(T);
         }
 
         private int GetIndex(T item)
@@ -104,7 +143,7 @@
                     return true;
                 }
 
-                // Alternatif probing stratejileri
+               // Alternative probing strategies
                 index = (index + i) % capacity; // Linear probing
                 index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
                 index = (index + 3) % capacity; // Plus3 probing

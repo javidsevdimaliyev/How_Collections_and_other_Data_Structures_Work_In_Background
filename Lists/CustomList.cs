@@ -1,11 +1,16 @@
 ﻿using System.Collections;
+using System.Drawing;
 
 namespace Lists
 {
-    /// <summary>
-    /// Custom List functionality by using array
-    /// </summary>
-    /// <typeparam name="T"></typeparam>
+
+    // List<T>:
+    //    Space Complexity : O(n)
+    //    Time Complexity : 
+    //    Add: O(1) amortized, O(n) worst-case (resize)
+    //    Remove: O(n)
+    //    Search: O(n)
+    //    Access: O(1)
     public class CustomList<T> : IEnumerable<T>, IEnumerator<T>
     {
         #region ctor
@@ -27,6 +32,7 @@ namespace Lists
             Reset();
         }
         #endregion
+
 
         #region members
 
@@ -78,6 +84,8 @@ namespace Lists
         }
         #endregion
 
+
+
         #region methods
 
 
@@ -95,7 +103,7 @@ namespace Lists
 
         public int AddRange(T[] items)
         {
-            if (arrSize + items.Length >= capacity)
+            if (arrSize + items.Length > capacity)
             {
                 Resize(arrSize + items.Length);
             }
@@ -140,7 +148,7 @@ namespace Lists
             Array.Resize(ref arr, newSize);
             GC.Collect();
         }
-        void SetCurrent(int increase)
+        void IncreaseIndex(int increase)
         {
             currentIndex += increase;
             eof = currentIndex > 0 && currentIndex >= arrSize - 1;
@@ -149,14 +157,14 @@ namespace Lists
         void Setindex(int index)
         {
             currentIndex = 0;
-            SetCurrent(index);
+            IncreaseIndex(index);
         }
 
         bool Next()
         {
             if (!eof)
             {
-                SetCurrent(1);
+                IncreaseIndex(1);
                 return true;
             }
 
@@ -167,7 +175,7 @@ namespace Lists
         {
             if (!bof)
             {
-                SetCurrent(-1);
+                IncreaseIndex(-1);
                 return true;
             }
 

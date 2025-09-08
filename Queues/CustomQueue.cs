@@ -2,6 +2,18 @@
 
 namespace Queues
 {
+    // Data Structures => Queue
+    // FIFO (First in first out)
+    // Queue imlementation samples:
+    //Fast Food restaurant order queue, Bank queue, Call Center
+
+    // Queue<T>:
+    //    Space Complexity : O(n)
+    //    Time Complexity : 
+    //    Enqueue (Add): O(1)
+    //    Dequeue (Remove): O(1)
+    //    Peek: O(1)
+    //    Search: O(n)
     public class CustomQueue<T> : IEnumerable<T>
     {
         private const int DEFAULT_SIZE = 10;
@@ -79,8 +91,7 @@ namespace Queues
                 NEW -> 1, 2, 3          // count = 3, head = 0, tail = 2
             */
 
-            int capacity = elements.Length / 2;
-            var newArray = new T[capacity];
+            var newArray = new T[elements.Length / 2];
 
             Array.Copy(elements, head, newArray, 0, count);
             elements = newArray;

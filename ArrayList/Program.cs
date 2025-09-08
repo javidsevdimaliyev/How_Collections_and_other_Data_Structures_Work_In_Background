@@ -1,8 +1,12 @@
 ﻿
 
-// Add: O(1) (In worst case O(n))
-// Remove: O(n)
-// Find: O(n)
+// ArrayList:
+//    Space Complexity : O(n)
+//    Time Complexity : 
+//    Add: O(1) amortized, O(n) worst-case (resize)
+//    Remove: O(n)
+//    Search: O(n)
+//    Access: O(1)
 using System.Collections;
 
 public class ArrayList

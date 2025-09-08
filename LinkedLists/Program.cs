@@ -7,9 +7,9 @@ CustomLinkedList<int> customList = new();
 
 customList.AddFirst(1);
 customList.AddLast(2);
-customList.AddLast(new[] { 3, 4, 5 });
-customList.AddMiddle(10);
-customList.AddAfter(9, 5);
+customList.AddLast(new[] { 4, 5, 7 });
+customList.AddMiddle(3);
+customList.AddAfter(6, 5);
 customList.RemoveFirst();
 customList.RemoveLast();
 customList.Remove(5);

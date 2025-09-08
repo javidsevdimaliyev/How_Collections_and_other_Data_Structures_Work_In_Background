@@ -1,16 +1,23 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace HashTables
+﻿namespace HashTables
 {
-    /// <summary>
-    /// Dictionary With Probing Alghorithms
-    /// </summary>
-    /// <typeparam name="TKey"></typeparam>
-    /// <typeparam name="TValue"></typeparam>
+
+    /*
+     Solutions to Hash Table collisions
+        General logic      : h(x)=x % size
+
+        Linear probing     : h(x)=(x+i) % size
+        Chaining probing   : h(x)=x % size and contains one more data like LinkedList next node  (Default Use of Dictionary)  
+        Quadratic probing  : h(x)=(x+i^2) % size
+        Plus3 probing      : h(x)=(x+3) % size
+        Double Hashing     : h(x)=(x+i*2) % size 
+
+        Except Chaining probing, others are named in general Open addressing technigue.
+    
+        Time Complexity : O(1)
+        Add: O(1) average, O(n) worst-case
+        Remove: O(1) average, O(n) worst-case
+        Search: O(1) average, O(n) worst-case
+    */
     public class CustomDictionary<TKey, TValue>
     {
         private const int DefaultCapacity = 10;
@@ -49,9 +56,9 @@ namespace HashTables
             while (keys[index] != null)
             {
                 index = (index + i) % capacity; // Linear probing
-                index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
-                index = (index + 3) % capacity; // Plus3 probing
-                index = (index + i * 2) % capacity; //  Double Hashing probing
+                //index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
+                //index = (index + 3) % capacity; // Plus3 probing
+                //index = (index + i * 2) % capacity; //  Double Hashing probing
                 i++;
 
                 if (i >= capacity)
@@ -78,9 +85,9 @@ namespace HashTables
                 }
 
                 index = (index + i) % capacity; // Linear probing
-                index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
-                index = (index + 3) % capacity; // Plus3 probing
-                index = (index + i * 2) % capacity; //  Double Hashing probing
+                //index = (index + (int)Math.Pow(i, 2)) % capacity; // Quadratic probing
+                //index = (index + 3) % capacity; // Plus3 probing
+                //index = (index + i * 2) % capacity; //  Double Hashing probing
                 i++;
             }
 

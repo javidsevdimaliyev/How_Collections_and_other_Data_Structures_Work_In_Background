@@ -2,6 +2,15 @@
 
 namespace LinkedLists
 {
+  
+    // LinkedList<T>:
+    //    Space Complexity : O(n)
+    //    Time Complexity : 
+    //    Add:    O(1) (head/tail), O(n) (specific position)
+    //    Remove: O(1) if node reference is known, O(n) otherwise
+    //    Search: O(n)
+    //    Access: O(n)
+
     public class CustomLinkedList<T> : IEnumerable<T>
     {
         public Node<T> Head { get; private set; }
@@ -97,12 +106,54 @@ namespace LinkedLists
                     };
 
                     current.Next = newNode;
+                    if (newNode.Next is null)
+                        Tail = newNode;
                     return;
                 }
 
                 current = current.Next;
             }
+
+           
         }
+
+        public void AddSorted(T value)
+        {
+            var newNode = new Node<T>(value);
+
+            // If the list is empty, insert as the first and last node
+            if (Head is null)
+            {
+                Head = Tail = newNode;
+                return;
+            }
+
+            // If the new value is less than the head, insert at the beginning
+            if (Comparer<T>.Default.Compare(value, Head.Data) < 0)
+            {
+                newNode.Next = Head;
+                Head = newNode;
+                return;
+            }
+
+            // Traverse the list to find the correct position to insert
+            var current = Head;
+            while (current.Next is not null &&
+                   Comparer<T>.Default.Compare(value, current.Next.Data) > 0)
+            {
+                current = current.Next;
+            }
+
+            // Insert the new node in its sorted position
+            newNode.Next = current.Next;
+            current.Next = newNode;
+
+            // If inserted at the end, update the Tail reference
+            if (newNode.Next is null)
+                Tail = newNode;
+        }
+
+
 
         public T Find(T value)
         {

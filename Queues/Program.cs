@@ -1,9 +1,6 @@
 ﻿using Queues;
 
-// Data Structures => Queue
-// FIFO (First in first out)
-// Queue imlementation samples:
-//Fast Food restaurant order queue, Bank queue, Call Center
+
 
 CustomQueue<string> charqueue = new();
 

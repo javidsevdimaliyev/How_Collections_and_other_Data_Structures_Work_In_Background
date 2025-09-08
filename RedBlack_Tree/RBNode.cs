@@ -1,6 +1,15 @@
-﻿namespace RedBlack_Tree
+﻿using System;
+
+namespace RedBlack_Tree
 {
-    using System;
+
+    // Red-Black Tree:
+    //    Space Complexity : O(n)
+    //    Time Complexity  : O(log n)
+    //    Add:    O(log n)  // ən çox 2 rotation
+    //    Remove: O(log n)  // rotation + recoloring ola bilər
+    //    Search: O(log n)
+    //    Access: O(log n)
 
     public enum NodeColor
     {

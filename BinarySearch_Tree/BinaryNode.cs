@@ -6,7 +6,15 @@ using System.Threading.Tasks;
 
 namespace BinarySearch_Tree
 {
-   
+
+    // Binary Search Tree (BST):
+    //    Space Complexity : O(n)
+    //    Time Complexity  : O(h)   // h = height of tree
+    //    Add:    O(h) average, O(n) worst-case (skewed tree)
+    //    Remove: O(h) average, O(n) worst-case
+    //    Search: O(h) average, O(n) worst-case
+    //    Access: O(h)   // (element tapmaq üçün axtarış lazımdır)
+
     public class BinaryNode
     {
         public BinaryNode(int val)
@@ -25,6 +33,10 @@ namespace BinarySearch_Tree
         BinaryNode BaseBinaryNode { get; set; }
         BinaryNode ParentOfRemoveBinaryNode { get; set; }
 
+        public BinaryNodeOperations()
+        {
+            BaseBinaryNode = null;
+        }
         public BinaryNodeOperations(BinaryNode node)
         {
             BaseBinaryNode = node;
@@ -41,12 +53,15 @@ namespace BinarySearch_Tree
         //Applying with RECURSIVE
         public void AddBinaryNode(BinaryNode rootBinaryNode, int val)
         {
+            if (rootBinaryNode == null)
+            {
+                rootBinaryNode = new BinaryNode(val);
+            }
             if (val < rootBinaryNode.Val)
             {
                 if (rootBinaryNode.LeftBinaryNode is null)
                 {
                     rootBinaryNode.LeftBinaryNode = new BinaryNode(val);
-                    return;
                 }
                 else
                 {
@@ -58,7 +73,6 @@ namespace BinarySearch_Tree
                 if (rootBinaryNode.RightBinaryNode is null)
                 {
                     rootBinaryNode.RightBinaryNode = new BinaryNode(val);
-                    return;
                 }
                 else
                 {
@@ -92,8 +106,6 @@ namespace BinarySearch_Tree
         {
             Remove(BaseBinaryNode, value);
         }
-
-
 
         private void Find(BinaryNode node, int value)
         {

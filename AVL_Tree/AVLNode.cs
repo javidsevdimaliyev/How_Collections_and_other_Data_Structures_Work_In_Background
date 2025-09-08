@@ -1,11 +1,15 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace AVL_Tree
+﻿namespace AVL_Tree
 {
+    //Soviet mathematicians, Georgy Adelson-Velsky and Evgenii Landis
+
+    // AVL Tree:
+    //    Space Complexity : O(n)
+    //    Time Complexity  : O(log n)
+    //    Add:    O(log n)  // rotation ola bilər
+    //    Remove: O(log n)  // rotation ola bilər
+    //    Search: O(log n)
+    //    Access: O(log n)  // random access yoxdur, axtarış lazımdır
+
     public class AVLNode
     {
         public AVLNode(int val)
@@ -24,6 +28,10 @@ namespace AVL_Tree
     {
         AVLNode BaseNode { get; set; }
 
+        public AVLNodeOperations()
+        {
+            BaseNode = null;
+        }
         public AVLNodeOperations(AVLNode node)
         {
             BaseNode = node;
@@ -33,34 +41,138 @@ namespace AVL_Tree
         {
             foreach (var val in values)
             {
-                AddNode(BaseNode, val);
+                BaseNode = AddNode(BaseNode, val);
             }
         }
 
-        public void AddNode(AVLNode rootNode, int val)
+        public AVLNode AddNode(AVLNode rootNode, int val)
         {
             if (rootNode == null)
             {
-                rootNode = new AVLNode(val);
+                return new AVLNode(val);
             }
             else if (val < rootNode.Val)
             {
-                AddNode(rootNode.LeftNode, val);
+                rootNode.LeftNode = AddNode(rootNode.LeftNode, val);
             }
             else if (val > rootNode.Val)
             {
-                AddNode(rootNode.RightNode, val);
+                rootNode.RightNode = AddNode(rootNode.RightNode, val);
             }
 
             UpdateHeight(rootNode);
-            Balance(rootNode);
+            return Balance(rootNode); 
         }
 
-        public void Remove(int value)
+
+        #region Balance Operations
+
+        private AVLNode Balance(AVLNode node)
         {
-            BaseNode = Remove(BaseNode, value);
+            if (node == null)
+            {
+                return null;
+            }
+
+            var heightDiff = GetBalance(node);
+
+            // Left heavy cases
+            if (heightDiff > 1)
+            {
+                if (GetBalance(node.LeftNode) >= 0)
+                {
+                    // Left-left case
+                    return RotateRight(node);
+                }
+                else
+                {
+                    // Left-right case
+                    return LeftRightRotate(node);
+                }
+            }
+
+            // Right heavy cases
+            if (heightDiff < -1)
+            {
+                if (GetBalance(node.RightNode) <= 0)
+                {
+                    // Right-right case
+                    return RotateLeft(node);
+                }
+                else
+                {
+                    // Right-left case
+                    return RightLeftRotate(node);
+                }
+            }
+
+            return node;
         }
 
+
+        private AVLNode RightLeftRotate(AVLNode z)
+        {
+            z.RightNode = RotateRight(z.RightNode);
+            return RotateLeft(z);
+        }
+
+        private AVLNode LeftRightRotate(AVLNode z)
+        {
+            z.LeftNode = RotateLeft(z.LeftNode);
+            return RotateRight(z);
+        }
+
+
+        private AVLNode RotateRight(AVLNode node)
+        {
+            var leftNode = node.LeftNode;
+            var T2 = leftNode.RightNode;
+
+            leftNode.RightNode = node;
+            node.LeftNode = T2;
+
+            UpdateHeight(node);
+            UpdateHeight(leftNode);
+
+            return leftNode;
+        }
+
+        private AVLNode RotateLeft(AVLNode node)
+        {
+            var rightNode = node.RightNode;
+            var T2 = rightNode.LeftNode;
+
+            rightNode.LeftNode = node;
+            node.RightNode = T2;
+
+            UpdateHeight(node);
+            UpdateHeight(rightNode);
+
+            return rightNode;
+        }
+
+
+        private int GetHeight(AVLNode node)
+        {
+            return (node != null) ? node.Height : 0;
+        }
+
+        private int GetBalance(AVLNode node)
+        {
+            return (node != null) ? GetHeight(node.LeftNode) - GetHeight(node.RightNode) : 0;
+        }
+
+        private void UpdateHeight(AVLNode node)
+        {
+            if (node != null)
+            {
+                node.Height = Math.Max(GetHeight(node.LeftNode), GetHeight(node.RightNode)) + 1;
+            }
+        }
+        #endregion
+
+
+        #region Search & remove
         public void Find(int value)
         {
             if (Find(BaseNode, value))
@@ -87,7 +199,7 @@ namespace AVL_Tree
                 Console.Write($"{node.Val} ");
                 InorderTraverse(node.RightNode);
             }
-            // Buraya başka işlemler ekleyebilirsiniz.
+
         }
 
         private bool Find(AVLNode node, int value)
@@ -109,6 +221,11 @@ namespace AVL_Tree
             {
                 return Find(node.RightNode, value);
             }
+        }
+
+        public void Remove(int value)
+        {
+            BaseNode = Remove(BaseNode, value);
         }
 
         private AVLNode Remove(AVLNode rootNode, int value)
@@ -173,104 +290,10 @@ namespace AVL_Tree
             return node;
         }
 
-        private AVLNode RotateRight(AVLNode y)
-        {
-            var x = y.LeftNode;
-            var T2 = x.RightNode;
 
-            x.RightNode = y;
-            y.LeftNode = T2;
 
-            UpdateHeight(y);
-            UpdateHeight(x);
+        #endregion
 
-            return x;
-        }
 
-        private AVLNode RotateLeft(AVLNode x)
-        {
-            var y = x.RightNode;
-            var T2 = y.LeftNode;
-
-            y.LeftNode = x;
-            x.RightNode = T2;
-
-            UpdateHeight(x);
-            UpdateHeight(y);
-
-            return y;
-        }
-
-        private AVLNode RightLeftRotate(AVLNode z)
-        {
-            z.RightNode = RotateRight(z.RightNode);
-            return RotateLeft(z);
-        }
-
-        private AVLNode LeftRightRotate(AVLNode z)
-        {
-            z.LeftNode = RotateLeft(z.LeftNode);
-            return RotateRight(z);
-        }
-
-        private int GetHeight(AVLNode node)
-        {
-            return (node != null) ? node.Height : 0;
-        }
-
-        private int GetBalance(AVLNode node)
-        {
-            return (node != null) ? GetHeight(node.LeftNode) - GetHeight(node.RightNode) : 0;
-        }
-
-        private void UpdateHeight(AVLNode node)
-        {
-            if (node != null)
-            {
-                node.Height = Math.Max(GetHeight(node.LeftNode), GetHeight(node.RightNode)) + 1;
-            }
-        }
-
-        private AVLNode Balance(AVLNode node)
-        {
-            if (node == null)
-            {
-                return null;
-            }
-
-            var balance = GetBalance(node);
-
-            // Sol ağır durumlar
-            if (balance > 1)
-            {
-                if (GetBalance(node.LeftNode) >= 0)
-                {
-                    // Sol-sol durumu
-                    return RotateRight(node);
-                }
-                else
-                {
-                    // Sol-sağ durumu
-                    return LeftRightRotate(node);
-                }
-            }
-
-            // Sağ ağır durumlar
-            if (balance < -1)
-            {
-                if (GetBalance(node.RightNode) <= 0)
-                {
-                    // Sağ-sağ durumu
-                    return RotateLeft(node);
-                }
-                else
-                {
-                    // Sağ-sol durumu
-                    return RightLeftRotate(node);
-                }
-            }
-
-            return node;
-        }
     }
 }

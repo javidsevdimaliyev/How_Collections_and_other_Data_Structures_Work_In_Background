@@ -1,11 +1,12 @@
 ﻿/*Solutions to HashSet collisions
 
    HashTable:
-      Time Complexity : O(1)
+      Space Complexity : O(n)
+      Time Complexity :
       Add: O(1) average, O(n) worst-case
       Remove: O(1) average, O(n) worst-case
       Search: O(1) average, O(n) worst-case
-    */
+*/
 using System.Collections;
 
 internal class HashTable

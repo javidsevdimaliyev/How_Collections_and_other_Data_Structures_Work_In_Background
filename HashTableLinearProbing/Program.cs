@@ -1,27 +1,6 @@
-﻿// Creating a Hashtable using linear probing
+﻿
 using HashTables;
 
-/*
- Solutions to Hash Table collisions
-    General logic      : h(x)=x % size
-
-    Linear probing     : h(x)=(x+i) % size
-    Chaining probing   : h(x)=x % size and contains one more data like LinkedList next node  (Default Use of Dictionary)  
-    Quadratic probing  : h(x)=(x+i^2) % size
-    Plus3 probing      : h(x)=(x+3) % size
-    Double Hashing     : h(x)=(x+i*2) % size 
-
-    Except Chaining probing, others are named in general Open addressing technigue.
- */
-
-
-/*  
-   Dictionary:
-      Time Complexity : O(1)
-      Add: O(1) average, O(n) worst-case
-      Remove: O(1) average, O(n) worst-case
-      Search: O(1) average, O(n) worst-case
-*/
 
 CustomDictionary<int, string> customDict = new ();
 customDict.Add(1, "One");

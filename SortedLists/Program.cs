@@ -1,33 +1,15 @@
 ﻿using SortedLists;
 
-// Data Structures => SortedList
-//Add: O(n)
-//Remove: O(n)
-//Find: O(log n)
-
-/* KEY-VALUE PAIR
-
-    1 -> "One"
-    1 -> "NeOne" // Throws an exception
-    2 -> "Two"
-    3 -> "Three"
-
- */
-
 CustomSortedList<int, string> list = new()
 {
         //{ 3, "three" },
         { 2, "two" },
         { 4, "four" },
-        { 3, "three" },
-        { 1, "one" },
-        { 5, "five" },
-        { 6, "six" },
-        { 8, "eight" }
+        { 1, "one" }
 };
 
 //list.Remove(3);
-list.Add(7, "Seven");
+list.Add(3, "Three");
 // list.Add(3, "NewThree");
 
 var val = list.TryGetValue(4, out string value);

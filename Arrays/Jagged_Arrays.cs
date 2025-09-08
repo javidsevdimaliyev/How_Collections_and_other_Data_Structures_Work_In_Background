@@ -47,24 +47,31 @@ namespace Arrays
             //sayilari deyisken olmasidir: 
 
             int[][] values = new int[3][];
-            values[0] = new int[2] { 1, 5 };
+            values[0] = new int[2] { 2, 6 };
             values[1] = new int[3] { 1, 5, 7 };
             values[2] = new int[4] { 1, 5, 7, 8 };
 
+            //or
             values[0][0] = 2;
             values[0][1] = 6;
+
+            values[1][0] = 1;
+            values[1][1] = 5;
+            values[1][2] = 7;
+
+            values[2][0] = 1;
+            values[2][1] = 5;
+            values[2][2] = 7;
+            values[2][3] = 8;
 
             //or 
 
             int[][] values2 = new int[][]
             {
-                new int[] { 1, 5 },
+                new int[] { 2, 6 },
                 new int[] { 1, 5, 7 },
                 new int[] { 1, 5, 7, 8 }
             };
-
-            values2[0][0] = 2;
-            values2[0][1] = 6;
 
         }
 
